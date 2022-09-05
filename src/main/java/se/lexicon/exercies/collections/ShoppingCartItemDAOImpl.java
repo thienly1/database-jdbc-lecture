@@ -17,7 +17,7 @@ public class ShoppingCartItemDAOImpl extends AbstractDAO implements ShoppingCart
    private static ShoppingCartItem mapToShoppingCartItem (ResultSet resultSet) throws SQLException {
        ProductDAO productDAO = new ProductDAOImpl();
        ShoppingCartDAO shoppingCartDAO = new ShoppingCartDAOImpl();
-       return new ShoppingCartItem(resultSet.getInt(1),resultSet.getInt(2), resultSet.getDouble(3),
+       return new ShoppingCartItem(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3),
                 productDAO.findById(resultSet.getInt(4)).get(), shoppingCartDAO.findById(resultSet.getInt(5)).get());
  }
 
@@ -36,12 +36,12 @@ public class ShoppingCartItemDAOImpl extends AbstractDAO implements ShoppingCart
 
             statement.setInt(1, cartItem.getAmount());
             statement.setDouble(2, cartItem.getTotalPrice());
-            statement.setObject(3, cartItem.getItem());
-            statement.setObject(4, cartItem.getShoppingCart());
+            statement.setInt(3, cartItem.getItem().getId());
+            statement.setInt(4, cartItem.getShoppingCart().getId());
             rowsAffected = statement.executeUpdate();
             keySet = statement.getGeneratedKeys();
                     while(keySet.next()){
-                        shoppingCartItem = new ShoppingCartItem(keySet.getInt("id"), cartItem.getAmount(), cartItem.getTotalPrice(),
+                        shoppingCartItem = new ShoppingCartItem(keySet.getInt(1), cartItem.getAmount(), cartItem.getTotalPrice(),
                                 cartItem.getItem(), cartItem.getShoppingCart());
                     }
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class ShoppingCartItemDAOImpl extends AbstractDAO implements ShoppingCart
         }finally {
             closeAll(rs, statement,connection);
         }
-           return found;
+               return found;
 
     }
     @Override

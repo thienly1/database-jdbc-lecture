@@ -8,6 +8,7 @@ import se.lexicon.exercies.interfaces.ShoppingCartDAO;
 import se.lexicon.exercies.interfaces.ShoppingCartItemDAO;
 import se.lexicon.exercies.model.Product;
 import se.lexicon.exercies.model.ShoppingCart;
+import se.lexicon.exercies.model.ShoppingCartItem;
 
 import java.time.LocalDateTime;
 
@@ -29,10 +30,13 @@ public class App {
 //                "Vislanda", "member")));
        // System.out.println(shoppingCartDAO.findById(1));
         ShoppingCartItemDAO shoppingCartItemDAO = new ShoppingCartItemDAOImpl();
+        System.out.println(shoppingCartItemDAO.save(new ShoppingCartItem(30, 50,
+                productDAO.findById(3).get(), shoppingCartDAO.findById(5).get())));
+
+
        // System.out.println(shoppingCartItemDAO.findById(3));
-        //System.out.println(shoppingCartItemDAO.findAll());
-        System.out.println(shoppingCartItemDAO.findByCartId(3));
-        System.out.println(shoppingCartItemDAO.findByProductId(4));
+//        System.out.println(shoppingCartItemDAO.findByCartId(3));
+//        System.out.println(shoppingCartItemDAO.findByProductId(4));
 
 
 

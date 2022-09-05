@@ -20,10 +20,11 @@ public class ShoppingCartItem {
     public ShoppingCartItem() {
     }
 
-    public ShoppingCartItem(int id, int amount, double totalPrice) {
-        this.id = id;
+    public ShoppingCartItem(int amount, double totalPrice, Product item, ShoppingCart shoppingCart) {
         this.amount = amount;
         this.totalPrice = totalPrice;
+        this.item = item;
+        this.shoppingCart = shoppingCart;
     }
 
     public int getId() {
